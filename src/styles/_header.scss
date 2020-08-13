@@ -1,16 +1,19 @@
+@import "variables";
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 7vh;
-  font-family: "Mulish", sans-serif;
-  font-size: 1.7rem;
-  letter-spacing: 0.4rem;
   background-color: rgba(64, 67, 98, 0.6);
-  color: rgb(236, 236, 236);
 }
 
 .profilepicture {
-  background-image: url(../assets/zac.jpg);
-  height: 0.2rem;
+  width: 45px;
+  border-radius: 50%;
+}
+
+.logout {
+  font-size: 1.7rem;
+  color: $maingray;
 }

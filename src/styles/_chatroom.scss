@@ -1,30 +1,39 @@
+@import "variables";
+
 .container {
-  width: 65vw;
+  width: 50vw;
   min-height: 60vh;
   margin: 3rem auto;
   overflow: hidden;
+  position: relative;
 }
 
 .topiclist {
-  width: 25%;
-  height: 60vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   background-color: rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.chatbox {
-  background-color: #e6e6e6;
-  width: 75%;
-  height: 60vh;
+.topics {
+  padding: 1rem;
+  color: $maingray;
 }
 
 .dashboard {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.screen {
+  background-color: #e6e6e65d;
+  height: 60vh;
 }
 
 .chatbar {
   display: flex;
+  margin-left: auto;
   padding: 0 3rem;
-  width: 100%;
   height: 3rem;
   background-color: #fff;
   justify-content: space-between;
@@ -34,4 +43,12 @@
 .send {
   color: rgb(91, 97, 168);
   font-size: 1.5rem;
+}
+
+.chat-input {
+  width: 100%;
+  height: 100%;
+  margin-right: auto;
+  outline: none;
+  border: 0;
 }

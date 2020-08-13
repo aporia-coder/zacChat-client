@@ -1,0 +1,37 @@
+.container {
+  width: 65vw;
+  min-height: 60vh;
+  margin: 3rem auto;
+  overflow: hidden;
+}
+
+.topiclist {
+  width: 25%;
+  height: 60vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chatbox {
+  background-color: #e6e6e6;
+  width: 75%;
+  height: 60vh;
+}
+
+.dashboard {
+  display: flex;
+}
+
+.chatbar {
+  display: flex;
+  padding: 0 3rem;
+  width: 100%;
+  height: 3rem;
+  background-color: #fff;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.send {
+  color: rgb(91, 97, 168);
+  font-size: 1.5rem;
+}

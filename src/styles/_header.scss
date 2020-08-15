@@ -16,4 +16,8 @@ header {
 .logout {
   font-size: 1.7rem;
   color: $maingray;
+  &-text {
+    display: flex;
+    align-items: center;
+  }
 }

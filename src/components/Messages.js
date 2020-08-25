@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Message = ({ from, msg }) => {
+export const Messages = ({ from, msg }) => {
   return (
     <div className="message">
       <img

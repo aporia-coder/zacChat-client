@@ -10,11 +10,13 @@ import { Chatroom } from "./pages/Chatroom";
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/chatroom" component={Chatroom} />
-      </Switch>
+    <div className="container">
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/chatroom" component={Chatroom} />
+        </Switch>
+      </div>
     </div>
   );
 }

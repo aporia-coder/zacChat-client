@@ -1,25 +1,40 @@
-import React, { useEffect } from "react";
-import { store } from "../redux/store";
-import { initialState as chats } from "../redux/store";
+import React, { useState, useEffect } from "react";
+import { initialState } from "../redux/reducers/dataReducer";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { Header } from "../components/Header";
-import { Message } from "../components/Messages";
+import { Messages } from "../components/Messages";
 import socket from "../api";
 
 export const Chatroom = () => {
-  const dispatch = useDispatch();
-  const topics = useSelector((state) => Object.keys(state));
+  const topics = useSelector((state) => Object.keys(state.data));
+
   const [activeTopic, setActiveTopic] = useState(topics[0]);
   const [text, setText] = useState("");
 
-  const sendMessage = (socket, value) => {
-    socket.emit("chat-message", value);
-    console.log(value);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userName);
+  const chats = useSelector((state) => state.data[activeTopic]);
+  console.log(user);
+
+  const sendMessageAction = (message) => {
+    socket.emit("chat-message", message);
+    setText("");
   };
 
+  useEffect(() => {
+    socket.on("chat-message", (msg) => {
+      dispatch({
+        type: "RECEIVE_MESSAGE",
+        payload: msg,
+      });
+      return () => {
+        socket.off("chat-message");
+      };
+    });
+  }, []);
+
   return (
-    <div className="container">
+    <>
       <Header topic={activeTopic} />
       <div className="dashboard">
         <div className="topiclist">
@@ -44,11 +59,12 @@ export const Chatroom = () => {
               active
               <br /> users
             </h2>
+            {user}
           </div>
         </div>
         <div className="screen">
-          {chats[activeTopic].map((chat, index) => (
-            <Message from={chat.from} msg={chat.msg} key={index} />
+          {chats.map((chat, index) => (
+            <Messages from={chat.from} msg={chat.msg} key={index} />
           ))}
         </div>
       </div>
@@ -60,10 +76,15 @@ export const Chatroom = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button className="send-button" onClick={sendMessage(socket, text)}>
+        <button
+          className="send-button"
+          onClick={() =>
+            sendMessageAction({ from: user, msg: text, topic: activeTopic })
+          }
+        >
           <i className="fas fa-paper-plane send"></i>
         </button>
       </div>
-    </div>
+    </>
   );
 };

@@ -1,9 +1,16 @@
-import { ADD_USER } from '../types';
+const initialState = {
+  userName: "Zac",
+  joinMsg: "",
+};
 
-export default function (state, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_USER
+    case "ADD_USER":
+      return {
+        ...state,
+        joinMsg: `Welcome ${action.payload}`,
+      };
     default:
-      return state
+      return state;
   }
 }

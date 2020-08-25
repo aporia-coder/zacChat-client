@@ -1,36 +1,17 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import dataReducer from "./reducers/dataReducer";
+import userReducer from "./reducers/userReducer";
 
-export const initialState = {
-  General: [
-    {
-      from: "Zac",
-      msg: "Welcome to the General channel!",
-    },
-  ],
-  Philosophy: [
-    {
-      from: "Zac",
-      msg: "Welcome to the Philosophy channel!",
-    },
-  ],
-  Technology: [
-    {
-      from: "Zac",
-      msg: "Welcome to the Technology channel!",
-    },
-  ],
-  Music: [
-    {
-      from: "Zac",
-      msg: "Welcome to the Music channel!",
-    },
-  ],
-};
+const initialState = {};
 
-export const store = createStore(
-  dataReducer,
+const reducer = combineReducers({
+  user: userReducer,
+  data: dataReducer,
+});
+
+const store = createStore(
+  reducer,
   initialState,
   compose(
     applyMiddleware(thunk),

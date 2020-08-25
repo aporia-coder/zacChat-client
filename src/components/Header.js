@@ -1,16 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LogoutButton } from "./LogoutButton";
 
 export const Header = ({ topic }) => {
   return (
     <header>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <div className="logout-text">
-          <i className="fas fa-sign-in-alt logout"></i>
-          <h2>logout</h2>
-        </div>
-      </Link>
-      <h1>{topic} chat</h1>
+      <LogoutButton />
+      <h1>{topic ? topic + " chat" : "Login"}</h1>
       <img
         src={require("../assets/zac.jpg")}
         alt="Profile"

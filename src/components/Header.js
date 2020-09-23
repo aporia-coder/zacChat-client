@@ -5,8 +5,8 @@ import { LogoutButton } from "./LogoutButton";
 export const Header = ({ topic }) => {
   return (
     <header>
-      <LogoutButton />
-      <h1>{topic ? topic + " chat" : "Login"}</h1>
+      <LogoutButton className="logout-logo" />
+      <h1>{topic ? topic + " chat" : "login"}</h1>
       <img
         src={require("../assets/zac.jpg")}
         alt="Profile"

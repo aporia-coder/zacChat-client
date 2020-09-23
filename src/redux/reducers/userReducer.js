@@ -1,6 +1,5 @@
 const initialState = {
-  userName: "Zac",
-  joinMsg: "",
+  users: ["Zac"],
 };
 
 export default function (state = initialState, action) {
@@ -8,7 +7,7 @@ export default function (state = initialState, action) {
     case "ADD_USER":
       return {
         ...state,
-        joinMsg: `Welcome ${action.payload}`,
+        users: [...state.users, action.payload],
       };
     default:
       return state;

@@ -6,6 +6,7 @@
   margin: 3rem auto;
   overflow: hidden;
   position: relative;
+  box-shadow: 7px -1px 28px -6px rgba(0, 0, 0, 0.75);
 }
 
 .topiclist {
@@ -15,18 +16,19 @@
   text-align: center;
 }
 
-.topics {
+.topics-container {
   color: $maingray;
-  padding: 5px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.2rem;
+  font-weight: 400;
+  padding: 0.5rem 5px;
 }
 
-.topic {
-  padding: 0.2rem 0;
-  color: $maingray;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
+.topics {
+  text-transform: capitalize;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.103);
+  }
 }
 
 .dashboard {
@@ -93,4 +95,20 @@
   // border: 1px solid red;
   transform: translate(-50%, -50%);
   transform: rotate(45deg);
+}
+
+.dot {
+  color: rgb(66, 197, 66);
+  padding-right: 2rem;
+}
+
+.profilePic {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.form {
+  flex-direction: column;
+  @include flexCenter;
 }

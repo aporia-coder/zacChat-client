@@ -5,7 +5,7 @@ header {
   align-items: center;
   justify-content: space-around;
   height: 7vh;
-  background-color: rgba(64, 67, 98, 0.6);
+  background-color: rgba(64, 67, 98, 0.377);
 }
 
 .profilepicture {
@@ -19,5 +19,8 @@ header {
   &-text {
     display: flex;
     align-items: center;
+  }
+  &-logo {
+    // align-self: flex-start;
   }
 }

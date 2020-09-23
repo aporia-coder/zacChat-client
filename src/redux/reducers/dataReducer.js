@@ -38,6 +38,10 @@ export default function (state = initialState, action) {
           },
         ],
       };
+    case "IS_TYPING":
+      return {
+        ...state,
+      };
     default:
       return state;
   }

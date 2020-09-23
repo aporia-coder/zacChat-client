@@ -12,13 +12,30 @@ export const Chatroom = () => {
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.userName);
+  const users = useSelector((state) => state.user.users);
+  const user = useSelector((state) => state.user.users[users.length - 1]);
   const chats = useSelector((state) => state.data[activeTopic]);
-  console.log(user);
+  // ACTIONS
 
   const sendMessageAction = (message) => {
     socket.emit("chat-message", message);
     setText("");
+  };
+
+  const isTypingAction = (user) => {
+    socket.broadcast.emit("typing", `${user} is typing...`);
+  };
+
+  const handleSubmit = (e) => {
+    try {
+      e.preventDefault();
+      if (!text) return;
+      dispatch(
+        sendMessageAction({ from: user, msg: text, topic: activeTopic }),
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -38,7 +55,7 @@ export const Chatroom = () => {
       <Header topic={activeTopic} />
       <div className="dashboard">
         <div className="topiclist">
-          <div className="topics">
+          <div className="topics-container">
             <i className="far fa-comments"></i>
             <h2>topics</h2>
             <ul>
@@ -59,7 +76,12 @@ export const Chatroom = () => {
               active
               <br /> users
             </h2>
-            {user}
+            {users.map((u, i) => (
+              <div key={i}>
+                <i className="fas fa-circle dot"></i>
+                {u}
+              </div>
+            ))}
           </div>
         </div>
         <div className="screen">
@@ -68,23 +90,20 @@ export const Chatroom = () => {
           ))}
         </div>
       </div>
-      <div className="chatbar">
-        <input
-          className="chat-input"
-          type="text"
-          placeholder="Your Message"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button
-          className="send-button"
-          onClick={() =>
-            sendMessageAction({ from: user, msg: text, topic: activeTopic })
-          }
-        >
-          <i className="fas fa-paper-plane send"></i>
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="chatbar">
+          <input
+            className="chat-input"
+            type="text"
+            placeholder="Your Message"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button className="send-button" type="submit">
+            <i className="fas fa-paper-plane send"></i>
+          </button>
+        </div>
+      </form>
     </>
   );
 };

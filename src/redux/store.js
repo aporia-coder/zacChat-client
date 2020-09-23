@@ -10,11 +10,13 @@ const reducer = combineReducers({
   data: dataReducer,
 });
 
+const middleware = [thunk];
+
 const store = createStore(
   reducer,
   initialState,
   compose(
-    applyMiddleware(thunk),
+    applyMiddleware(...middleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),

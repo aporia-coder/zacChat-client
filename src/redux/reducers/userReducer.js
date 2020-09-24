@@ -1,5 +1,5 @@
 const initialState = {
-  users: ["Zac"],
+  users: ["ZacBot"],
 };
 
 export default function (state = initialState, action) {

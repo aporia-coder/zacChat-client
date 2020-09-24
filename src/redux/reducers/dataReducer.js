@@ -1,25 +1,25 @@
 export const initialState = {
   General: [
     {
-      from: "Zac",
+      from: "ZacBot",
       msg: "Welcome to the General channel!",
     },
   ],
   Philosophy: [
     {
-      from: "Zac",
+      from: "ZacBot",
       msg: "Welcome to the Philosophy channel!",
     },
   ],
   Technology: [
     {
-      from: "Zac",
+      from: "ZacBot",
       msg: "Welcome to the Technology channel!",
     },
   ],
   Music: [
     {
-      from: "Zac",
+      from: "ZacBot",
       msg: "Welcome to the Music channel!",
     },
   ],

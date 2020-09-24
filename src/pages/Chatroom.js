@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { initialState } from "../redux/reducers/dataReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Header } from "../components/Header";
@@ -10,6 +10,7 @@ export const Chatroom = () => {
 
   const [activeTopic, setActiveTopic] = useState(topics[0]);
   const [text, setText] = useState("");
+  const divRef = useRef(null);
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
@@ -39,15 +40,38 @@ export const Chatroom = () => {
   };
 
   useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: "smooth" });
+
     socket.on("chat-message", (msg) => {
       dispatch({
         type: "RECEIVE_MESSAGE",
         payload: msg,
       });
-      return () => {
-        socket.off("chat-message");
-      };
     });
+
+    socket.on("add-user", (user) => {
+      dispatch({
+        type: "RECEIVE_MESSAGE",
+        payload: {
+          from: "ZacBot",
+          msg: `${user} has joined the Chat`,
+          topic: activeTopic,
+        },
+      });
+    });
+
+    socket.on("disconnect", (user) => {
+      dispatch({
+        type: "RECEIVE_MESSAGE",
+        payload: {
+          from: "ZacBot",
+          msg: `${user} has left the Chat`,
+          topic: activeTopic,
+        },
+      });
+    });
+
+    return () => socket.disconnect();
   }, []);
 
   return (
@@ -77,9 +101,9 @@ export const Chatroom = () => {
               <br /> users
             </h2>
             {users.map((u, i) => (
-              <div key={i}>
+              <div key={i} className="users">
                 <i className="fas fa-circle dot"></i>
-                {u}
+                <span>{u}</span>
               </div>
             ))}
           </div>
@@ -88,6 +112,7 @@ export const Chatroom = () => {
           {chats.map((chat, index) => (
             <Messages from={chat.from} msg={chat.msg} key={index} />
           ))}
+          <div ref={divRef} />
         </div>
       </div>
       <form onSubmit={handleSubmit}>
@@ -95,7 +120,7 @@ export const Chatroom = () => {
           <input
             className="chat-input"
             type="text"
-            placeholder="Your Message"
+            placeholder="Your Message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

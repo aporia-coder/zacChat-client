@@ -20,19 +20,15 @@ export const Login = () => {
     try {
       e.preventDefault();
       dispatch(loginAction(user));
-      history.push("/chatroom");
     } catch (err) {
       console.log(err);
     }
   };
 
-  socket.on("add-user", (user) => {
-    dispatch({ type: "ADD_USER", payload: user });
-  });
-
   useEffect(() => {
     socket.on("add-user", (user) => {
       dispatch({ type: "ADD_USER", payload: user });
+      history.push("/chatroom");
     });
     return () => {
       socket.off("add-user");
@@ -47,10 +43,13 @@ export const Login = () => {
           <img src={blank} alt="Profile" className="profilePic" />
           <input
             type="text"
+            placeholder="Enter Username..."
             value={user}
             onChange={(e) => setUser(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" class="btn-submit">
+            Submit
+          </button>
         </form>
       </div>
     </>

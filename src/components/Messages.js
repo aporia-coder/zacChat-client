@@ -14,7 +14,7 @@ export const Messages = ({ from, msg }) => {
       />
       <div className="chat-message">
         <h5>{from}</h5>
-        <span> {`   ${dayjs(date).fromNow()}`}</span>
+        <span> {`${dayjs(date).fromNow()}`}</span>
         <p>{msg}</p>
         <div className="arrow"></div>
       </div>

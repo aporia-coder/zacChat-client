@@ -23,6 +23,10 @@ export const Chatroom = () => {
     setText("");
   };
 
+  const userDisconnects = (message) => {
+    socket.broadcast.emit("chat-message", message);
+  };
+
   const isTypingAction = (user) => {
     socket.broadcast.emit("typing", `${user} is typing...`);
   };
